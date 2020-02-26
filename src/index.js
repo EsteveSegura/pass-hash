@@ -18,8 +18,8 @@ class passwordGenerated {
         let charValueOne = arrCharCodes[0]
         let charValueTwo = arrCharCodes[1]
         let applyCharValues = charValueOne + charValueTwo
-        if (applyCharValues < 6) {
-            while (applyCharValues <= 6) {
+        if (applyCharValues < 12) {
+            while (applyCharValues <= 12) {
                 let numToStr = charValueOne.toString()[0]
                 applyCharValues = applyCharValues + (parseInt(Math.floor(numToStr / 2)))
                 //console.log(applyCharValues + " Sumando hasta que de el resultado optimo")
@@ -30,7 +30,7 @@ class passwordGenerated {
             /*if (numToStr > 3) {
                 numToStr = numToStr + 3
             }*/
-            while (applyCharValues >= 15) {
+            while (applyCharValues >= 20) {
                 applyCharValues = applyCharValues - numToStr
                 //console.log(applyCharValues + " Restando hasta que de el resultado optimo")
             }
@@ -82,7 +82,6 @@ class passwordGenerated {
 
         let halfLongitude = Math.floor(parseInt(longitude) / 2)
 
-        console.log("half" + halfLongitude)
         for(let i = 0 ; i < halfLongitude - 1 ; i ++){
             finalPasswordValue = finalPasswordValue + pw1[i]
         }
@@ -90,11 +89,10 @@ class passwordGenerated {
             finalPasswordValue = finalPasswordValue + pw2[i]
         }
 
-        console.log("FINAL password")
         return finalPasswordValue
     }
 }
 
-let pw = new passwordGenerated('62', 'girlazo', 'gmail')
+let pw = new passwordGenerated('12', '1GiRzz', 'battl1e.net')
 console.log(pw.finalPassword())
 
