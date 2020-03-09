@@ -6,11 +6,7 @@ class passwordGenerated {
     }
 
     convertAsciiToNum(str) {
-        let charsToNum = []
-        for (let i = 0; i < str.length; i++) {
-            charsToNum.push(str[i].charCodeAt(0))
-        }
-        return charsToNum
+        return String(str).split('').map(x => x.charCodeAt());
     }
 
     getLong(key) {
