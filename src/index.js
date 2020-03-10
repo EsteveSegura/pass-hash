@@ -6,37 +6,23 @@ class passwordGenerated {
     }
 
     convertAsciiToNum(str) {
-        let charsToNum = []
-        for (let i = 0; i < str.length; i++) {
-            charsToNum.push(str[i].charCodeAt(0))
-        }
-        return charsToNum
+        return String(str).split('').map(x => x.charCodeAt());
     }
 
     getLong(key) {
-        let arrCharCodes = this.convertAsciiToNum(key)
-        let charValueOne = arrCharCodes[0]
-        let charValueTwo = arrCharCodes[1]
-        let applyCharValues = charValueOne + charValueTwo
-        if (applyCharValues < 12) {
-            while (applyCharValues <= 12) {
-                let numToStr = charValueOne.toString()[0]
-                applyCharValues = applyCharValues + (parseInt(Math.floor(numToStr / 2)))
-                //console.log(applyCharValues + " Sumando hasta que de el resultado optimo")
-            }
-        }
-        if (applyCharValues >= 20) {
-            let numToStr = parseInt(charValueOne.toString()[0])
-            /*if (numToStr > 3) {
-                numToStr = numToStr + 3
-            }*/
-            while (applyCharValues >= 20) {
-                applyCharValues = applyCharValues - numToStr
-                //console.log(applyCharValues + " Restando hasta que de el resultado optimo")
-            }
+        let [a, b] = this.convertAsciiToNum(key)
+        let r = a + b;
+        let n = Number(String(a)[0]);
 
+        while(r <= 12 ) {
+            r += Math.floor(n / 2);
         }
-        return applyCharValues
+
+        while(r >= 20) {
+            r -= n;
+        }
+        
+        return r;
     }
 
     stringTol33t(str) {
