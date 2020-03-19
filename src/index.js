@@ -1,8 +1,10 @@
 class passwordGenerated {
     constructor(key, login, service) {
-        this.key = key,
-            this.login = login,
-            this.service = service
+        this.key = key;
+        this.login = login;
+        this.service = service;
+
+        this.l33tTable = new Map().set('1', 'i').set('4', 'a').set('3', 'E').set('2', 'u').set('5', 'S').set('7', 't').set('0', 'o');
     }
 
     convertAsciiToNum(str) {
@@ -26,38 +28,26 @@ class passwordGenerated {
     }
 
     stringTol33t(str) {
-        let strToEdit = str
-        let l33t = []
-        let l33tTable = [{ "key": "1", "value": "i" }, { "key": "4", "value": "a" },{"key" : "3", "value" : "E"},{"key" : "2", "value" : "u"},{"key" : "5", "value" : "S"},{"key" : "7", "value" : "t"},{"key" : "0", "value" : "o"}]
-        for (let i = 0; i < strToEdit.length; i++) {
-            let strI = strToEdit[i].toString()
-            for(let k = 0 ; k < strI.length; k++){
-                for(let j = 0 ; j < l33tTable.length;j++){
-                    if(strI[k] == l33tTable[j].key){
-                        l33t.push(l33tTable[j].value)
-                        break;
-                    }else{
-                        l33t.push(strI[k])
-                        break;
-                    }
-                }
-            }
+        str = str.join('');
+
+        for(let [k, v] of this.l33tTable.entries()) {
+            str = str.replace(RegExp(k, 'g'), v);
         }
-        return l33t.join('')
+
+        return str;
     }
 
     getFirstPasswordPart(strLogin) {
         let reverseString = strLogin.split("").reverse().join("");
-        let reverseStringToCharCode = this.convertAsciiToNum(reverseString)
+        let reverseStringToCharCode = this.convertAsciiToNum(reverseString);
         
         return this.stringTol33t(reverseStringToCharCode);
-
     }
 
     getSecondPasswordPart(strService) {
-        let serviceStr = strService.split("").join("");
-        let strToCharCode = this.convertAsciiToNum(serviceStr)
-        return this.stringTol33t(strToCharCode)
+        let strToCharCode = this.convertAsciiToNum(strService);
+
+        return this.stringTol33t(strToCharCode);
     }
 
     finalPassword() {
