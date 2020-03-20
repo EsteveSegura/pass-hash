@@ -8,11 +8,17 @@ class passwordGenerated {
     }
 
     convertAsciiToNum(str) {
-        return String(str).split('').map(x => x.charCodeAt());
+        str = String(str) || '00';
+
+        if(str.length == 1) {
+            str += str;
+        }
+
+        return str.split('').map(x => x.charCodeAt());
     }
 
     getLong(key) {
-        let [a, b] = this.convertAsciiToNum(key)
+        let [a, b] = this.convertAsciiToNum(key);
         let r = a + b;
         let n = Number(String(a)[0]);
 
@@ -51,21 +57,11 @@ class passwordGenerated {
     }
 
     finalPassword() {
-        let finalPasswordValue = ""
-        let longitude = this.getLong(this.key)
+        let halfLongitude = this.getLong(this.key) / 2;
         let pw1 = this.getFirstPasswordPart(this.login);
         let pw2 = this.getSecondPasswordPart(this.service);
 
-        let halfLongitude = Math.floor(parseInt(longitude) / 2)
-
-        for(let i = 0 ; i < halfLongitude - 1 ; i ++){
-            finalPasswordValue = finalPasswordValue + pw1[i]
-        }
-        for(let i = 0 ; i < halfLongitude - 1 ; i ++){
-            finalPasswordValue = finalPasswordValue + pw2[i]
-        }
-
-        return finalPasswordValue
+        return pw1.substring(0, halfLongitude) + pw2.substring(0, halfLongitude);
     }
 }
 
